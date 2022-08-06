@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>insta485</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="linksTop">
+        <a href="/">Home</a>
+        <div class="linksR">
+            <a href="/explore/">Explore</a>
+            <a href="/users/{{ username }}/">{{ username }}</a>
+        </div>
+    </div>
+
+    <div class="info">
+        <a href="/users/{{ username }}/" class="username">{{ username }}</a>
+    </div>
+
+    <!-- Have an option to delete the user -->
+    <form action="/accounts/?target={{ url_for('create') }}" method="post" enctype="multipart/form-data">
+        <input type="submit" name="delete" value="confirm delete account" />
+        <input type="hidden" name="operation" value="delete" />
+    </form>
+</body>
+
+</html>

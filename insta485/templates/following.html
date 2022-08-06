@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>insta485</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="linksTop">
+        <a href="/">Home</a>
+        <div class="linksR">
+            <a href="/explore/">explore</a>
+            <a href="/users/{{ logname }}/">{{ logname }}</a>
+        </div>
+    </div>
+    <div class="following-container">
+        <h1>Following</h1>
+        <div class="icon-container">
+            {% for follow in following %}
+            <div class="following" id="{{ follow.username }}">
+                <img class="following-icon" src="{{ follow.user_img_url }}" alt="following profile photo" />
+                <a href="/users/{{ follow.username }}/">{{ follow.username }}</a>
+                {% if follow.username != logname %}
+                {% if follow.logname_follows_username %}
+                <h3 class="relationship">following</h3>
+                <form action="/following/?target={{ url_for('show_following', username=username) }}" method="post"
+                    enctype="multipart/form-data">
+                    <input type="submit" name="unfollow" value="unfollow" />
+                    <input type="hidden" name="username" value="{{ follow.username }}" />
+                    <input type="hidden" name="operation" value="unfollow" />
+                </form>
+                {% else %}
+                <h3 class="relationship">not following</h3>
+                <form action="/following/?target={{ url_for('show_following', username=username) }}" method="post"
+                    enctype="multipart/form-data">
+                    <input type="submit" name="follow" value="follow" />
+                    <input type="hidden" name="username" value="{{ follow.username }}" />
+                    <input type="hidden" name="operation" value="follow" />
+                </form>
+                {% endif %}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

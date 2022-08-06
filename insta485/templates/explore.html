@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>insta485</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="linksTop">
+        <a href="/">Home</a>
+        <div class="linksR">
+            <a href="/explore/">explore</a>
+            <a href="/users/{{ logname }}/">{{ logname }}</a>
+        </div>
+    </div>
+    <div class="explore-container">
+        <h1>Discover People</h1>
+        <div class="icon-container">
+            {% for not_follow in not_following %}
+            <div class="not-following" id="{{ not_follow.username }}">
+                <img class="not-following-icon" src="{{ not_follow.user_img_url }}" alt="not following profile photo" />
+                <a href="/users/{{ not_follow.username }}/">{{ not_follow.username }}</a>
+            </div>
+
+            <!-- Have an option to follow this user -->
+            <form action="/following/?target={{ url_for('show_explore') }}" method="post" enctype="multipart/form-data">
+                <input type="submit" name="follow" value="follow" />
+                <input type="hidden" name="username" value="{{ not_follow.username }}" />
+                <input type="hidden" name="operation" value="follow" />
+            </form>
+
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

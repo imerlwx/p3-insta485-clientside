@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>insta485</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="linksTop">
+        <a href="/">Home</a>
+        <div class="linksR">
+            <a href="/explore/">explore</a>
+            <a href="/users/{{ logname }}/">{{ logname }}</a>
+        </div>
+    </div>
+    <div class="profile-container">
+        <p class="profile-username">{{ username }}</p>
+        <div class="following-or-not">
+            {% if username != logname %}
+            {% if logname_follows_username %}
+            <h3 class="relationship">following</h3>
+            <!-- If currently following, produce a button to not follow -->
+            <form action="/following/?target={{ url_for('show_user', username=username) }}" method="post"
+                enctype="multipart/form-data">
+                <input type="submit" name="unfollow" value="unfollow" />
+                <input type="hidden" name="username" value="{{ username }}" />
+                <input type="hidden" name="operation" value="unfollow" />
+            </form>
+            {% else %}
+            <h3 class="relationship">not following</h3>
+            <!-- If currently not following, produce a button to follow -->
+            <form action="/following/?target={{ url_for('show_user', username=username) }}" method="post"
+                enctype="multipart/form-data">
+                <input type="submit" name="follow" value="follow" />
+                <input type="hidden" name="username" value="{{ username }}" />
+                <input type="hidden" name="operation" value="follow" />
+            </form>
+            {% endif %}
+            {% else %}
+            <!-- If username and logname are equal, produce a link to edit file and a button to logout -->
+            <a href="/accounts/edit/">Edit profile</a>
+            <form action="/accounts/logout/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="logout" value="Logout" />
+            </form>
+            {% endif %}
+        </div>
+        <div class="stats-container">
+            {% if total_posts == 1 %}
+            <h2 class="post-count">{{ total_posts }} post</h2>
+            {% else %}
+            <h2 class="post-count">{{ total_posts }} posts</h2>
+            {% endif %}
+            {% if followers == 1 %}
+            <a href="/users/{{ username }}/followers/">
+                <h2 class="followers-count">{{ followers }} follower</h2>
+            </a>
+            {% else %}
+            <a href="/users/{{ username }}/followers/">
+                <h2 class="followers-count">{{ followers }} followers</h2>
+            </a>
+            {% endif %}
+            <a href="/users/{{ username }}/following/">
+                <h2 class="following-count">{{ following }} following</h2>
+            </a>
+        </div>
+        <h2 class="profile-name">{{ fullname }}</h2>
+
+        {% if username == logname %}
+        <!-- If the username is equal to the logname, have an option to upload new posts -->
+        <form action="/posts/?target={{ url_for('show_user', username=username) }}" method="post"
+            enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required />
+            <input type="submit" name="create_post" value="upload new post" />
+            <input type="hidden" name="operation" value="create" />
+        </form>
+        {% endif %}
+
+        <div class="profile-photo-container">
+            {% for post in posts %}
+            <div class="profile-photo-row">
+                <a href="/posts/{{ post.postid }}/">
+                    <img class="profile-page-photo" src="{{ post.img_url }}" alt="post image">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
