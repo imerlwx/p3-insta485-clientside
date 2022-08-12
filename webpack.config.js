@@ -1,13 +1,13 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  mode: "development",
-  entry: "./insta485/js/main.jsx",
+  mode: 'development',
+  entry: './insta485/js/main.jsx',
   output: {
-    path: path.join(__dirname, "/insta485/static/js/"),
-    filename: "bundle.js",
+    path: path.join(__dirname, '/insta485/static/js/'),
+    filename: 'bundle.js',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -15,15 +15,15 @@ module.exports = {
         test: /\.jsx?$/,
         // Exclude external modules from loader tests
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"],
-          plugins: ["@babel/transform-runtime"],
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['@babel/transform-runtime'],
         },
       },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
   },
 };
