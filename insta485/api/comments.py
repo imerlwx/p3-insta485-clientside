@@ -32,9 +32,7 @@ def create_comments():
     )
 
     # Get the inserted commentid
-    cur = connection.execute(
-        "SELECT last_insert_rowid() as commentid,"
-    )
+    cur = connection.execute("SELECT last_insert_rowid() AS commentid")
     commentid = cur.fetchall()[0]['commentid']
     context = {
         "commentid": commentid,
@@ -47,7 +45,7 @@ def create_comments():
     return flask.jsonify(**context), 201
 
 
-@insta485.app.route('/api/v1/comments/<int:commentid>', methods=['DELETE'])
+@insta485.app.route('/api/v1/comments/<int:commentid>/', methods=['DELETE'])
 def delete_comments(commentid):
     """Delete a comment, including the ID of the comment in the URL."""
     # Make sure HTTP Basic Authentication works
@@ -67,12 +65,12 @@ def delete_comments(commentid):
     cur = connection.execute(
         "SELECT owner FROM comments WHERE commentid = ?", (commentid, )
     )
-    comment_owner = cur.fetchall()[0]['owner']
+    comment_owner = cur.fetchall()
     # If the commentid does not exist, return 404.
-    if comment_owner is None:
+    if len(comment_owner) == 0:
         return flask.jsonify(**error_checking(404)), 404
     # If the user doesn’t own the comment, return 403.
-    if comment_owner != username:
+    if comment_owner[0]['owner'] != username:
         return flask.jsonify(**error_checking(403)), 403
 
     connection.execute(

@@ -29,17 +29,16 @@ def create_likes():
 
     # Check if the like already exists, if so return a 200 response
     cur = connection.execute(
-        "SELECT count(1), likeid FROM likes WHERE owner = ? AND postid = ?",
+        "SELECT likeid FROM likes WHERE owner = ? AND postid = ?",
         (username, postid, )
     )
-    like_or_not = cur.fetchall()[0]['count(1)']
-    if like_or_not:
-        likeid = cur.fetchall()[0]['likeid']
+    likeid = cur.fetchall()
+    if len(likeid) != 0:
         context = {
-            "likeid": likeid,
-            "url": "/api/v1/likes/" + str(likeid) + "/",
+            "likeid": likeid[0]['likeid'],
+            "url": "/api/v1/likes/" + str(likeid[0]['likeid']) + "/",
         }
-        return flask.jsonify(**context), 201
+        return flask.jsonify(**context), 200
 
     # Add a new like into database, return 201 on success
     connection.execute(
@@ -58,7 +57,7 @@ def create_likes():
     return flask.jsonify(**context), 201
 
 
-@insta485.app.route('/api/v1/likes/<int:likeid>', methods=['DELETE'])
+@insta485.app.route('/api/v1/likes/<int:likeid>/', methods=['DELETE'])
 def delete_likes(likeid):
     """Delete a like from the database."""
     # Make sure HTTP Basic Authentication works
@@ -66,7 +65,7 @@ def delete_likes(likeid):
         return flask.jsonify(**error_checking(403)), 403
 
     if not flask.request.authorization:
-        username = flask.session['username']
+        username = flask.session.get('username')
     else:
         username = flask.request.authorization['username']
         password = flask.request.authorization['password']
@@ -77,12 +76,12 @@ def delete_likes(likeid):
     cur = connection.execute(
         "SELECT owner FROM likes WHERE likeid = ?", (likeid, )
     )
-    likes_owner = cur.fetchall()[0]['owner']
+    likes_owner = cur.fetchall()
     # If the likeid does not exist, return 404.
-    if likes_owner is None:
+    if len(likes_owner) == 0:
         return flask.jsonify(**error_checking(404)), 404
     # If the user does not own the like, return 403.
-    if likes_owner != username:
+    if likes_owner[0]['owner'] != username:
         return flask.jsonify(**error_checking(403)), 403
 
     connection.execute(

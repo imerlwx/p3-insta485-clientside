@@ -120,11 +120,11 @@ def get_post_info(username, postid_url_slug):
         "SELECT likeid FROM likes WHERE owner = ? AND postid = ?",
         (username, postid_url_slug, )
     )
-    likeid = cur.fetchall()[0]['likeid']
+    likeid = cur.fetchall()
     like_url = None
     lognameLikesThis = False
-    if likeid is not None:
-        like_url = "/api/v1/likes/" + str(likeid) + "/"
+    if len(likeid) != 0:
+        like_url = "/api/v1/likes/" + str(likeid[0]['likeid']) + "/"
         lognameLikesThis = True
 
     cur = connection.execute(
