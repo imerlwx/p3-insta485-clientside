@@ -75,7 +75,7 @@ def get_posts():
     for post in posts:
         post_info = {}
         post_info['postid'] = int(post['postid'])
-        post_info['url'] = "/api/v1/posts/" + str(post['postid']) + "/"
+        post_info['url'] = flask.request.path + str(post['postid']) + "/"
         post_list.append(post_info)
 
     context["results"] = post_list

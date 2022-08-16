@@ -36,7 +36,7 @@ def create_likes():
     if len(likeid) != 0:
         context = {
             "likeid": likeid[0]['likeid'],
-            "url": "/api/v1/likes/" + str(likeid[0]['likeid']) + "/",
+            "url": flask.request.path + str(likeid[0]['likeid']) + "/",
         }
         return flask.jsonify(**context), 200
 
@@ -52,7 +52,7 @@ def create_likes():
     likeid = cur.fetchall()[0]['likeid']
     context = {
         "likeid": likeid,
-        "url": "/api/v1/likes/" + str(likeid) + "/",
+        "url": flask.request.path + str(likeid) + "/",
     }
     return flask.jsonify(**context), 201
 

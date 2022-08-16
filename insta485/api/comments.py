@@ -40,7 +40,7 @@ def create_comments():
         "owner": username,
         "ownerShowUrl": "/users/" + username + "/",
         "text": text,
-        "url": "/api/v1/comments/" + str(commentid) + "/",
+        "url": flask.request.path + str(commentid) + "/",
     }
     return flask.jsonify(**context), 201
 
