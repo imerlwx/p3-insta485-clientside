@@ -14,6 +14,8 @@
             <a href="/users/{{ logname }}/">{{ logname }}</a>
         </div>
     </div>
+
+    <!--
     <div id="postContainer">
         {%for item in posts %}
         <div class="post" id="{{ item.postid }}">
@@ -50,14 +52,14 @@
                 </div>
 
                 {% if item.like_or_not == 0 %}
-                <!-- If don't like, produce a like button -->
+                
                 <form action="/likes/?target={{ url_for('show_index') }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="operation" value="like" />
                     <input type="hidden" name="postid" value="{{ item.postid }}" />
                     <input type="submit" name="like" value="like" />
                 </form>
                 {% else %}
-                <!-- If already like, produce an unlike button -->
+                
                 <form action="/likes/?target={{ url_for('show_index') }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="operation" value="unlike" />
                     <input type="hidden" name="postid" value="{{ item.postid }}" />
@@ -65,7 +67,7 @@
                 </form>
                 {% endif %}
 
-                <!-- Have an option to comment on this post -->
+                
                 <form action="/comments/?target={{ url_for('show_index') }}" method="post"
                     enctype="multipart/form-data">
                     <input type="hidden" name="operation" value="create" />
@@ -76,7 +78,13 @@
             </div>
         </div>
         {% endfor %}
+    </div> -->
+
+    <div id="reactEntry">
+        Loading ...
     </div>
+    <!-- Load JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
 </body>
 
 </html>
