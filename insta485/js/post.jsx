@@ -56,10 +56,15 @@ class Post extends React.Component {
       .catch((error) => console.log(error));
   }
 
+  // componentWillUnmount() {
+  //   this.ismounted = false;
+  // }
+
   handleDoubleClick() {
     // This function will handle the double click on the image
     const { postid, lognameLikesThis } = this.state;
     const postUrl = `/api/v1/likes/?postid=${postid}`;
+    console.log();
 
     if (!lognameLikesThis) {
       fetch(postUrl, { credentials: 'same-origin', method: 'POST' })

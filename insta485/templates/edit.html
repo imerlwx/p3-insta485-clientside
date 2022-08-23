@@ -3,21 +3,26 @@
 
 <head>
     <title>insta485</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/accounts.css">
 </head>
 
 <body>
-    <div class="linksTop">
-        <a href="/">Home</a>
-        <div class="linksR">
-            <a href="/explore/">Explore</a>
-            <a href="/users/{{ logname }}/">{{ logname }}</a>
+    <div class="header">
+        <div class="header-left-logo">
+            <a href="/">
+                <img src="/static/images/logo.jpeg" class="logo" width="55" height="40" alt="ins485logo">
+            </a>
+        </div>
+        <div class="header-left-title">Insta 485</div>
+        <div class="header-right-explore">
+            <a href="/explore/" class="link-to-explore">explore</a>
+            <a href="/users/{{ logname }}/" class="link-to-name">{{ logname }}</a>
         </div>
     </div>
 
     <div class="info">
         <a href="/users/{{ logname }}/">
-            <img src="{{ img_url }}" class="profile_picture" alt="profile picture" />
+            <img src="{{ img_url }}" class="profile-picture" alt="profile picture" />
         </a>
         <a href="/users/{{ logname }}/" class="username">{{ logname }}</a>
     </div>
@@ -31,8 +36,8 @@
         <input type="hidden" name="operation" value="edit_account" />
     </form>
 
-    <a href="/accounts/password/" class="create_link">Change password</a>
-    <a href="/accounts/delete/" class="create_link">Delete account</a>
+    <a href="/accounts/password/" class="create-link" style="margin-left: 150px;">Change password</a>
+    <a href="/accounts/delete/" class="create-link" styple="margin-left: -120px">Delete account</a>
 
 </body>
 

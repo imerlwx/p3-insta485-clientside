@@ -11,6 +11,15 @@ class Comments extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const prevProps = state.prevProps || {};
+    const controlledValue = prevProps.comments !== props.comments ? props.comments : state.comments;
+    return {
+      prevProps: props,
+      comments: controlledValue,
+    };
+  }
+
   handleChange(event) {
     this.setState({ value: event.target.value });
   }

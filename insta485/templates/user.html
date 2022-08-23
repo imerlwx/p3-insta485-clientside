@@ -3,17 +3,23 @@
 
 <head>
     <title>insta485</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/user.css">
 </head>
 
 <body>
-    <div class="linksTop">
-        <a href="/">Home</a>
-        <div class="linksR">
-            <a href="/explore/">explore</a>
-            <a href="/users/{{ logname }}/">{{ logname }}</a>
+    <div class="header">
+        <div class="header-left-logo">
+            <a href="/">
+                <img src="/static/images/logo.jpeg" class="logo" width="55" height="40" alt="ins485logo">
+            </a>
+        </div>
+        <div class="header-left-title">Insta 485</div>
+        <div class="header-right-explore">
+            <a href="/explore/" class="link-to-explore">explore</a>
+            <a href="/users/{{ logname }}/" class="link-to-name">{{ logname }}</a>
         </div>
     </div>
+
     <div class="profile-container">
         <p class="profile-username">{{ username }}</p>
         <div class="following-or-not">
@@ -80,7 +86,7 @@
             {% for post in posts %}
             <div class="profile-photo-row">
                 <a href="/posts/{{ post.postid }}/">
-                    <img class="profile-page-photo" src="{{ post.img_url }}" alt="post image">
+                    <img class="profile-page-photo" src="{{ post.img_url }}" width="400" alt="post image">
                 </a>
             </div>
             {% endfor %}

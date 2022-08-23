@@ -1,0 +1,114 @@
+/*<style type="text/css">
+.inner {
+}
+.topbar {
+  overflow:hidden;
+}
+.topbar a {
+  float:left;
+  color: #000000;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+</style>
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    /*position: absolute;*/
+    display: block;
+    top: 0px;
+    left: 0px;
+    width: 1150px;
+    height: 70px;
+    /*background-color: skyblue;*/
+    margin-left: 50px;
+    /*z-index: 101;*/
+    border-bottom: 2px solid grey;
+}
+
+.header-left-logo {
+    float: left;
+    width: 70px;
+    height: 50px;
+    /*background-color: rgb(255, 0, 0);*/
+    border-right: 2px solid grey;
+    margin-top: 10px;
+}
+
+.header-left-logo .logo {
+    float: left;
+    margin-top: 4px;
+    margin-left: 14px;
+    border: none;
+}
+
+.header-left-title {
+    float: left;
+    font-family: Cursive;
+    font-size: 30px;
+    width: 150px;
+    /*background-color: yellow;*/
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.header-right-explore .link-to-explore {
+    float: right;
+    width: 85px;
+    height: 25px;
+    /*background-color: yellow;*/
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 25px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-family: Sans-serif;
+    border-right: 2px solid grey;
+    color: black;
+}
+
+.header-right-explore .link-to-name {
+    float: right;
+    width: 100px;
+    height: 25px;
+    /*background-color: yellow;*/
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 25px;
+    margin-right: 10px;
+    margin-left: 5px;
+    font-size: 20px;
+    font-family: Sans-serif;
+    color: black;
+}
+
+.inner {
+    margin-top: 80px
+}
+
+.post {
+    border: 1px solid #dbdbdb;
+    width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.post a {
+    float: left;
+    color: #000000;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.propic {
+    float: left;
+    width: 32px;
+    padding: 12px 12px;
+}

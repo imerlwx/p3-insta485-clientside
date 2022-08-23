@@ -3,33 +3,40 @@
 
 <head>
     <title>insta485</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/explore.css">
 </head>
 
 <body>
-    <div class="linksTop">
-        <a href="/">Home</a>
-        <div class="linksR">
-            <a href="/explore/">explore</a>
-            <a href="/users/{{ logname }}/">{{ logname }}</a>
+    <div class="header">
+        <div class="header-left-logo">
+            <a href="/">
+                <img src="/static/images/logo.jpeg" class="logo" width="55" height="40" alt="ins485logo">
+            </a>
+        </div>
+        <div class="header-left-title">Insta 485</div>
+        <div class="header-right-explore">
+            <a href="/explore/" class="link-to-explore">explore</a>
+            <a href="/users/{{ logname }}/" class="link-to-name">{{ logname }}</a>
         </div>
     </div>
+
     <div class="explore-container">
-        <h1>Discover People</h1>
+        <div class="discover-word">
+            <p>Discover People</p>
+        </div>
         <div class="icon-container">
             {% for not_follow in not_following %}
-            <div class="not-following" id="{{ not_follow.username }}">
+            <div class="not-following-container">
                 <img class="not-following-icon" src="{{ not_follow.user_img_url }}" alt="not following profile photo" />
                 <a href="/users/{{ not_follow.username }}/">{{ not_follow.username }}</a>
+                <!-- Have an option to follow this user -->
+                <form action="/following/?target={{ url_for('show_explore') }}" method="post"
+                    enctype="multipart/form-data">
+                    <input type="submit" name="follow" value="follow" />
+                    <input type="hidden" name="username" value="{{ not_follow.username }}" />
+                    <input type="hidden" name="operation" value="follow" />
+                </form>
             </div>
-
-            <!-- Have an option to follow this user -->
-            <form action="/following/?target={{ url_for('show_explore') }}" method="post" enctype="multipart/form-data">
-                <input type="submit" name="follow" value="follow" />
-                <input type="hidden" name="username" value="{{ not_follow.username }}" />
-                <input type="hidden" name="operation" value="follow" />
-            </form>
-
             {% endfor %}
         </div>
     </div>

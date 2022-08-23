@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    /*position: absolute;*/
+    display: block;
+    top: 0px;
+    left: 0px;
+    width: 1150px;
+    height: 70px;
+    /*background-color: skyblue;*/
+    margin-left: 50px;
+    /*z-index: 101;*/
+    border-bottom: 2px solid grey;
+}
+
+.header-left-logo {
+    float: left;
+    width: 70px;
+    height: 50px;
+    /*background-color: rgb(255, 0, 0);*/
+    border-right: 2px solid grey;
+    margin-top: 10px;
+}
+
+.header-left-logo .logo {
+    float: left;
+    margin-top: 4px;
+    margin-left: 14px;
+    border: none;
+}
+
+.header-left-title {
+    float: left;
+    font-family: Cursive;
+    font-size: 30px;
+    width: 150px;
+    /*background-color: yellow;*/
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.header-right-explore .link-to-explore {
+    float: right;
+    width: 85px;
+    height: 25px;
+    /*background-color: yellow;*/
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 25px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-family: Sans-serif;
+    border-right: 2px solid grey;
+    color: black;
+}
+
+.header-right-explore .link-to-name {
+    float: right;
+    width: 100px;
+    height: 25px;
+    /*background-color: yellow;*/
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 25px;
+    margin-right: 10px;
+    margin-left: 5px;
+    font-size: 20px;
+    font-family: Sans-serif;
+    color: black;
+}
+
+.post {
+    width: 850px;
+    height: 600px;
+    margin-left: 200px;
+    margin-top: 40px;
+    border: 2px solid grey;
+}
+
+.post-image {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.user-post-info {
+    float: right;
+    width: 300px;
+    /*border: 2px solid grey;*/
+    height: 500px;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.user-post-info .post-profile-photo {
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.user-post-info .post-username {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+    float: left;
+    margin-top: 30px;
+}
+
+.timestamp {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+    float: left;
+    margin-top: 30px;
+}
+
+.below-post {
+    margin-left: -35px;
+    float: left;
+    margin-top: 50px;
+    width: 260px;
+    /*height: 350px;*/
+    /*background-color: green;*/
+}
+
+.below-post .comments {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.below-post .button {
+    float: left;
+    margin-left: 10px;
+}
