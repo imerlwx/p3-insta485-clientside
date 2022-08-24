@@ -65,7 +65,7 @@ def delete_likes(likeid):
         return flask.jsonify(**error_checking(403)), 403
 
     if not flask.request.authorization:
-        username = flask.session.get('username')
+        username = flask.session['username']
     else:
         username = flask.request.authorization['username']
         password = flask.request.authorization['password']

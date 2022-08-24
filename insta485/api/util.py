@@ -1,6 +1,7 @@
 """Status checking including error and password."""
 import hashlib
 import insta485
+import flask
 
 
 def error_checking(status_code):
@@ -32,27 +33,22 @@ def wrong_password(username, password):
             (username, )
         )
     # If username authentication fails, abort(403)
-    pas = cur.fetchall()
-    if len(pas) == 0:
-        return True
-    pas = pas[0]['password']
+    pas = cur.fetchall()[0]['password']
 
     # Verify password (if it is not encoded) against the user input
     if "$" not in pas:
-        if pas != password:
-            return True
-    else:
-        salt = pas.split("$")[1]
-        algorithm = 'sha512'
-        hash_obj = hashlib.new(algorithm)
-        password_salted = salt + password
-        hash_obj.update(password_salted.encode('utf-8'))
-        password_hash = hash_obj.hexdigest()
-        password_db_string = "$".join([algorithm, salt, password_hash])
+        return pas != password
 
-        # If password authentication fails, abort(403)
-        if password_db_string != pas:
-            return True
+    salt = pas.split("$")[1]
+    algorithm = 'sha512'
+    hash_obj = hashlib.new(algorithm)
+    password_salted = salt + password
+    hash_obj.update(password_salted.encode('utf-8'))
+    password_hash = hash_obj.hexdigest()
+    password_db_string = "$".join([algorithm, salt, password_hash])
+
+    # If password authentication fails, abort(403)
+    return password_db_string != pas
 
 
 def invalid_postid(postid):
@@ -63,3 +59,16 @@ def invalid_postid(postid):
     )
     max_postid = int(cur.fetchall()[0]['max_postid'])
     return max_postid < postid
+
+def check_auth(username):
+    """Check the username and password."""
+    if not flask.request.authorization and 'username' not in flask.session:
+        return flask.jsonify(**error_checking(403)), 403
+
+    if not flask.request.authorization:
+        username = flask.session['username']
+    else:
+        username = flask.request.authorization['username']
+        password = flask.request.authorization['password']
+        if wrong_password(username, password):
+            return flask.jsonify(**error_checking(403)), 403

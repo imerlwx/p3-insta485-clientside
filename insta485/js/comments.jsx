@@ -58,12 +58,11 @@ class Comments extends React.Component {
         if (!response.ok) throw Error(response.statusText);
         return response.json();
       })
-      .then(() => {
-        this.setState((prevState) => ({
-          comments: prevState.comments.filter((comment) => comment.commentid !== commentid),
-        })); // Use .filter to filter out the comment with commentid
-      })
       .catch((error) => console.log(error));
+
+    this.setState((prevState) => ({
+      comments: prevState.comments.filter((comment) => comment.commentid !== commentid),
+    })); // Use .filter to filter out the comment with commentid
   }
 
   render() {
@@ -78,12 +77,13 @@ class Comments extends React.Component {
         {comments.map((comment) => (
           <p key={comment.commentid}>
             <a href={comment.ownerShowUrl} style={ownerStyle}>{comment.owner}</a>
-            {comment.text}
+            {` ${comment.text}`}
             {comment.lognameOwnsThis ? (
               <button type="button" className="delete-comment-button" style={buttonStyle} onClick={this.handleClick.bind(this, comment.commentid, comment.url)}>
                 Delete
               </button>
             ) : null}
+            <br />
           </p>
         ))}
         <form className="comment-form" onSubmit={this.handleKeyDown}>
@@ -107,5 +107,5 @@ Comments.propTypes = {
     }),
   ).isRequired,
 };
-// å
+
 export default Comments;

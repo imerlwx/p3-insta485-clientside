@@ -1,7 +1,7 @@
 """REST API for posts."""
 import flask
 import insta485
-from insta485.api.util import error_checking, wrong_password, invalid_postid
+from insta485.api.util import wrong_password, error_checking, invalid_postid
 
 
 @insta485.app.route('/api/v1/posts/<int:postid_url_slug>/', methods=['GET'])
@@ -30,7 +30,7 @@ def get_post(postid_url_slug):
 
 @insta485.app.route('/api/v1/posts/', methods=['GET'])
 def get_posts():
-    """Returns posts based on size, page and postid_lte."""
+    """Return posts based on size, page and postid_lte."""
     # Make sure HTTP Basic Authentication works
     if not flask.request.authorization and 'username' not in flask.session:
         return flask.jsonify(**error_checking(403)), 403
@@ -80,7 +80,7 @@ def get_posts():
 
     context["results"] = post_list
     if ("size" in flask.request.args or "page" in flask.request.args or
-        "postid_lte" in flask.request.args):
+            "postid_lte" in flask.request.args):
         context["url"] = flask.request.full_path
     else:
         context["url"] = flask.request.path
@@ -122,10 +122,10 @@ def get_post_info(username, postid_url_slug):
     )
     likeid = cur.fetchall()
     like_url = None
-    lognameLikesThis = False
+    logname_likes_this = False
     if len(likeid) != 0:
         like_url = "/api/v1/likes/" + str(likeid[0]['likeid']) + "/"
-        lognameLikesThis = True
+        logname_likes_this = True
 
     cur = connection.execute(
         "SELECT count(likeid) AS numLikes FROM likes WHERE postid = ?",
@@ -133,7 +133,7 @@ def get_post_info(username, postid_url_slug):
     )
 
     likes = {
-        "lognameLikesThis": lognameLikesThis,
+        "lognameLikesThis": logname_likes_this,
         "numLikes": cur.fetchall()[0]['numLikes'],
         "url": like_url,
     }

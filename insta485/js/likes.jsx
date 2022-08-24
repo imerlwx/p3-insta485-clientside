@@ -11,8 +11,8 @@ class Likes extends React.Component {
 
   handleClick(event) {
     const { onLognameLikesChange } = this.props;
-    event.preventDefault();
-    onLognameLikesChange();
+    // event.preventDefault();
+    onLognameLikesChange(event);
   }
 
   render() {
